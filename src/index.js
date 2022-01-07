@@ -77,7 +77,7 @@ function onPicture (videoFrame) {
   // from texture coordinates as to crop out stride padding & filler rows using maxXTexCoord and maxYTexCoord.
 
   rgbaTexture.image2dBuffer(videoFrame)
-  // videoFrame.close()
+  videoFrame.close()
   simpleSurfaceShader.setTexture(rgbaTexture)
   simpleSurfaceShader.updateShaderData({ w: canvas.width, h: canvas.height })
   simpleSurfaceShader.draw()
@@ -123,7 +123,7 @@ function main () {
     videoDecoder.configure(config)
   }).then(() => {
     const fetches = []
-    for (let i = 0; i < 60; i++) {
+    for (let i = 0; i < 30; i++) {
       fetches.push(fetch(`h264samples/${i}`).then(response => {
         return response.arrayBuffer().then(function (buffer) {
           h264samples[i] = new Uint8Array(buffer)
